@@ -4,7 +4,7 @@ Decile_Table <- read.csv("COVID_Mortality_Trump_Voters_2.csv", header = TRUE, se
 #===== Plot COVID Mortality in Trump-Voting Counties
 
 par(mar = c(5, 4, 4, 4) + 0.3)
-plot(County_Table$Avg_Trump_vote,
+plot(County_Table$GOP_2020,
      County_Table$COVID_Deaths_Per_10K,
      main = 'COVID Mortality in Trump-Voting Counties',
      xlab = '% of Trump vote',
@@ -12,7 +12,7 @@ plot(County_Table$Avg_Trump_vote,
      pch = 19,
      cex = 0.05,
      col = "red")
-points(County_Table$Avg_Trump_vote,
+points(County_Table$GOP_2020,
        County_Table$All_Deaths_Per_10K,
        pch = 19,
        cex = 0.05,
@@ -23,10 +23,10 @@ legend(x = "topleft",
        pch = c(19, 19, 19),
        cex = 0.5,
        col = c("blue", "red", "black"))
-abline(lm(COVID_Deaths_Per_10K ~ Avg_Trump_vote, data = County_Table), col="red")
-abline(lm(All_Deaths_Per_10K ~ Avg_Trump_vote, data = County_Table), col = "blue")
+abline(lm(COVID_Deaths_Per_10K ~ GOP_2020, data = County_Table), col="red")
+abline(lm(All_Deaths_Per_10K ~ GOP_2020, data = County_Table), col = "blue")
 par(new = TRUE)
-plot(County_Table$Avg_Trump_vote,
+plot(County_Table$GOP_2020,
      County_Table$median_age,
      axes = FALSE,
      xlab = "",
@@ -35,13 +35,13 @@ plot(County_Table$Avg_Trump_vote,
      cex = 0.05)
 axis(side = 4, at = pretty(range(County_Table$median_age)))
 mtext("Median County Resident Age", side = 4, line = 3)
-abline(lm(median_age ~ Avg_Trump_vote, data = County_Table), col="black")
+abline(lm(median_age ~ GOP_2020, data = County_Table), col="black")
 
 #===== Correlation measurements: COVID Mortality in Trump-Voting Counties
 
-COVID_Death_Summary <- summary(lm(COVID_Deaths_Per_10K ~ Avg_Trump_vote, data = County_Table))
-All_Death_Summary <- summary(lm(All_Deaths_Per_10K ~ Avg_Trump_vote, data = County_Table))
-Age_Summary <- summary(lm(median_age ~ Avg_Trump_vote, data = County_Table))
+COVID_Death_Summary <- summary(lm(COVID_Deaths_Per_10K ~ GOP_2020, data = County_Table))
+All_Death_Summary <- summary(lm(All_Deaths_Per_10K ~ GOP_2020, data = County_Table))
+Age_Summary <- summary(lm(median_age ~ GOP_2020, data = County_Table))
 
 intercept1 <- COVID_Death_Summary$coefficients[1,1]
 slope1 <- COVID_Death_Summary$coefficients[2,1]
@@ -74,7 +74,7 @@ COVID_Mortality_Summary <- data.frame(metrics,
 # ==== Vaccination Rates across Trump-Voting Counties
 
 par(mar = c(5, 4, 4, 4) + 0.3)
-plot(County_Table$Avg_Trump_vote,
+plot(County_Table$GOP_2020,
      County_Table$Vax_Pct,
      main = 'COVID Vaccination in Trump-Voting Counties',
      xlab = '% of Trump vote',
@@ -82,22 +82,22 @@ plot(County_Table$Avg_Trump_vote,
      pch = 19,
      cex = 0.1,
      col = "darkblue")
-points(County_Table$Avg_Trump_vote,
+points(County_Table$GOP_2020,
        County_Table$Vax_5Plus_Pct,
        pch = 19,
        cex = 0.1,
        col = "purple")
-points(County_Table$Avg_Trump_vote,
+points(County_Table$GOP_2020,
        County_Table$Vax_12Plus_Pct,
        pch = 19,
        cex = 0.1,
        col = "darkgreen")
-points(County_Table$Avg_Trump_vote,
+points(County_Table$GOP_2020,
        County_Table$Vax_18Plus_Pct,
        pch = 19,
        cex = 0.1,
        col = "darkorange")
-points(County_Table$Avg_Trump_vote,
+points(County_Table$GOP_2020,
        County_Table$Vax_5Plus_Pct,
        pch = 19,
        cex = 0.1,
@@ -108,19 +108,19 @@ legend(x = "bottomleft",
        pch = c(19, 19, 19, 19, 19),
        cex = 0.5,
        col = c("darkblue", "purple", "darkgreen", "darkorange", "darkred"))
-abline(lm(Vax_Pct ~ Avg_Trump_vote, data = County_Table), col="darkblue", lwd = 2)
-abline(lm(Vax_5Plus_Pct ~ Avg_Trump_vote, data = County_Table), col = "purple", lwd = 2)
-abline(lm(Vax_12Plus_Pct ~ Avg_Trump_vote, data = County_Table), col = "darkgreen", lwd = 2)
-abline(lm(Vax_18Plus_Pct ~ Avg_Trump_vote, data = County_Table), col = "darkorange", lwd = 2)
-abline(lm(Vax_65Plus_Pct ~ Avg_Trump_vote, data = County_Table), col = "darkred", lwd = 2)
+abline(lm(Vax_Pct ~ GOP_2020, data = County_Table), col="darkblue", lwd = 2)
+abline(lm(Vax_5Plus_Pct ~ GOP_2020, data = County_Table), col = "purple", lwd = 2)
+abline(lm(Vax_12Plus_Pct ~ GOP_2020, data = County_Table), col = "darkgreen", lwd = 2)
+abline(lm(Vax_18Plus_Pct ~ GOP_2020, data = County_Table), col = "darkorange", lwd = 2)
+abline(lm(Vax_65Plus_Pct ~ GOP_2020, data = County_Table), col = "darkred", lwd = 2)
 
 #==== Correlation Measurements: Vaccination Rates Across Trump-Voting Counties
 
-Vax_Summary <- summary(lm(Vax_Pct ~ Avg_Trump_vote, data = County_Table))
-Vax5_Summary <- summary(lm(Vax_5Plus_Pct ~ Avg_Trump_vote, data = County_Table))
-Vax12_Summary <- summary(lm(Vax_12Plus_Pct ~ Avg_Trump_vote, data = County_Table))
-Vax18_Summary <- summary(lm(Vax_18Plus_Pct ~ Avg_Trump_vote, data = County_Table))
-Vax65_Summary <- summary(lm(Vax_65Plus_Pct ~ Avg_Trump_vote, data = County_Table))
+Vax_Summary <- summary(lm(Vax_Pct ~ GOP_2020, data = County_Table))
+Vax5_Summary <- summary(lm(Vax_5Plus_Pct ~ GOP_2020, data = County_Table))
+Vax12_Summary <- summary(lm(Vax_12Plus_Pct ~ GOP_2020, data = County_Table))
+Vax18_Summary <- summary(lm(Vax_18Plus_Pct ~ GOP_2020, data = County_Table))
+Vax65_Summary <- summary(lm(Vax_65Plus_Pct ~ GOP_2020, data = County_Table))
 
 intercept1a <- Vax_Summary$coefficients[1,1]
 slope1a <- Vax_Summary$coefficients[2,1]
