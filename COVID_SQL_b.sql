@@ -35,7 +35,7 @@ WITH Election_2020 (county_state, GOP_2020) AS (
        WHERE YEAR = 3
      ),
 
-     tbl1 (county_state, Avg_Trump_vote, Vax_Total, Vax_5Plus, Vax_12Plus, Vax_18Plus, Vax_65Plus, county_pop, pop_5plus, pop_12plus_est, pop_18plus, pop_65plus, COVID_Deaths, All_Deaths, Trump_vote_Decile) AS (
+     tbl1 (county_state, GOP_2020, Vax_Total, Vax_5Plus, Vax_12Plus, Vax_18Plus, Vax_65Plus, county_pop, pop_5plus, pop_12plus_est, pop_18plus, pop_65plus, COVID_Deaths, All_Deaths, Trump_vote_Decile) AS (
      SELECT c.county_state,
             CAST(b.GOP_2020 AS float),
             CAST(c.Vax_Total AS float),
