@@ -34,7 +34,6 @@ WITH Election_2020 (county_state, GOP_2020) AS (
 
 SELECT c.county_state,
        b.GOP_2020,
-       CAST(b.GOP_2020 AS float) AS Avg_Trump_vote,
        c.Vax_Pct,
        c.Vax_5Plus_Pct,
        c.Vax_12Plus_Pct,
@@ -48,4 +47,4 @@ SELECT c.county_state,
   JOIN COVID_Mortality d ON b.county_state = d.county_state
   JOIN County_Age_Population e ON b.county_state = e.county_state
   WHERE Vax_Pct > 0 AND COVID_Deaths > 0
-  ORDER BY Avg_Trump_vote DESC;
+  ORDER BY b.GOP_2020 DESC;
